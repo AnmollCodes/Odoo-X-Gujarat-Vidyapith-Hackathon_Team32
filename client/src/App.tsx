@@ -8,6 +8,8 @@ import Marketplace from "@/pages/marketplace";
 import FarmerProfile from "@/pages/farmer-profile";
 import ProductDetails from "@/pages/product-details";
 import Verify from "@/pages/verify";
+import SignIn from "@/pages/sign-in";
+import Register from "@/pages/register";
 
 function Router() {
   return (
@@ -17,6 +19,8 @@ function Router() {
       <Route path="/farmer/:id" component={FarmerProfile}/>
       <Route path="/product/:id" component={ProductDetails}/>
       <Route path="/verify" component={Verify}/>
+      <Route path="/sign-in" component={SignIn}/>
+      <Route path="/register" component={Register}/>
       <Route component={NotFound} />
     </Switch>
   );
