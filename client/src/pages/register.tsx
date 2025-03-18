@@ -292,7 +292,8 @@ export default function Register() {
                             <Input
                               placeholder="Your location"
                               className="pl-10"
-                              {...field}
+                              value={field.value || ""}
+                              onChange={field.onChange}
                               disabled={isLoading}
                             />
                           </div>
@@ -316,10 +317,8 @@ export default function Register() {
           <CardFooter className="flex justify-center border-t p-6">
             <p className="text-sm text-gray-600">
               Already have an account?{" "}
-              <Link href="/sign-in">
-                <a className="font-medium text-primary-600 hover:underline">
-                  Sign in
-                </a>
+              <Link href="/sign-in" className="font-medium text-primary-600 hover:underline">
+                Sign in
               </Link>
             </p>
           </CardFooter>

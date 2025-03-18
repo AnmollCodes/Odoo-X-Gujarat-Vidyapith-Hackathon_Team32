@@ -187,10 +187,8 @@ export default function SignIn() {
           <CardFooter className="flex justify-center border-t p-6">
             <p className="text-sm text-gray-600">
               Don't have an account?{" "}
-              <Link href="/register">
-                <a className="font-medium text-primary-600 hover:underline">
-                  Register here
-                </a>
+              <Link href="/register" className="font-medium text-primary-600 hover:underline">
+                Register here
               </Link>
             </p>
           </CardFooter>
