@@ -12,6 +12,10 @@ import ProductDetails from "@/pages/product-details";
 import Verify from "@/pages/verify";
 import SignIn from "@/pages/sign-in";
 import Register from "@/pages/register";
+import ForgotPassword from "@/pages/forgot-password";
+import ResetPassword from "@/pages/reset-password";
+import About from "@/pages/about";
+import ForFarmers from "@/pages/for-farmers";
 
 function Router() {
   return (
@@ -23,6 +27,10 @@ function Router() {
       <ProtectedRoute path="/verify" component={Verify} />
       <Route path="/sign-in" component={SignIn} />
       <Route path="/register" component={Register} />
+      <Route path="/forgot-password" component={ForgotPassword} />
+      <Route path="/reset-password" component={ResetPassword} />
+      <Route path="/about" component={About} />
+      <Route path="/for-farmers" component={ForFarmers} />
       <Route component={NotFound} />
     </Switch>
   );

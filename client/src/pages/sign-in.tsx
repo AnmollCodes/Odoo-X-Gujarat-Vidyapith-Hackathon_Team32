@@ -124,7 +124,7 @@ export default function SignIn() {
                       </FormControl>
                       <FormMessage />
                       <div className="text-right mt-1">
-                        <Link href="/forgot-password" className="text-sm text-primary-500 hover:underline">
+                        <Link href="/forgot-password" className="text-sm text-primary-600 hover:underline">
                           Forgot password?
                         </Link>
                       </div>

@@ -120,4 +120,60 @@ export function setupAuth(app: Express) {
     }
     res.json(req.session.user);
   });
+
+  // Forgot password endpoint
+  app.post('/api/auth/forgot-password', async (req: Request, res: Response) => {
+    try {
+      const { email } = req.body;
+      
+      if (!email) {
+        return res.status(400).json({ message: 'Email is required' });
+      }
+
+      // In a real application, you would:
+      // 1. Find the user by email
+      // 2. Generate a unique token and store it with an expiration
+      // 3. Send an email with the reset link containing the token
+      
+      // For this demo, we'll simulate success without sending a real email
+      // Just returning a 200 status as if we sent the email
+      setTimeout(() => {
+        // Simulate processing time
+        console.log(`Password reset requested for: ${email}`);
+      }, 500);
+
+      res.json({ message: 'Password reset instructions sent to your email' });
+    } catch (error) {
+      console.error('Forgot password error:', error);
+      res.status(500).json({ message: 'Server error during password reset request' });
+    }
+  });
+
+  // Reset password endpoint
+  app.post('/api/auth/reset-password', async (req: Request, res: Response) => {
+    try {
+      const { token, password } = req.body;
+      
+      if (!token || !password) {
+        return res.status(400).json({ message: 'Token and password are required' });
+      }
+
+      // In a real application, you would:
+      // 1. Verify the token is valid and not expired
+      // 2. Find the user associated with this token
+      // 3. Update the user's password
+      // 4. Invalidate the token
+
+      // For this demo, we'll simulate success
+      setTimeout(() => {
+        // Simulate processing time
+        console.log(`Password reset processed with token: ${token.substring(0, 6)}...`);
+      }, 500);
+      
+      res.json({ message: 'Password reset successful' });
+    } catch (error) {
+      console.error('Reset password error:', error);
+      res.status(500).json({ message: 'Server error during password reset' });
+    }
+  });
 }
