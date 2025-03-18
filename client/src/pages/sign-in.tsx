@@ -1,15 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/use-auth";
 
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -29,10 +27,16 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function SignIn() {
-  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const { toast } = useToast();
+  const { user, login, isLoading } = useAuth();
   const [, setLocation] = useLocation();
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (user) {
+      setLocation("/");
+    }
+  }, [user, setLocation]);
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -43,29 +47,12 @@ export default function SignIn() {
   });
 
   async function onSubmit(data: LoginFormValues) {
-    setIsLoading(true);
     try {
-      const response = await apiRequest(
-        "POST", 
-        "/api/auth/login",
-        data
-      );
-      
-      toast({
-        title: "Login successful",
-        description: "Welcome back to AgriChain!",
-      });
-      
-      // Redirect to home page
-      setLocation("/");
-    } catch (error: any) {
-      toast({
-        title: "Login failed",
-        description: error.message || "Please check your credentials and try again",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
+      await login(data.username, data.password);
+      // No need for toast or redirect here as it's handled in the auth hook
+    } catch (error) {
+      // Error handling is done in the auth hook
+      console.error("Login submission error:", error);
     }
   }
 

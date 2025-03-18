@@ -1,16 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/use-auth";
 import { insertUserSchema, InsertUser } from "@shared/schema";
 
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -48,11 +46,17 @@ const registerSchema = insertUserSchema.extend({
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export default function Register() {
-  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { toast } = useToast();
+  const { user, register, isLoading } = useAuth();
   const [, setLocation] = useLocation();
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (user) {
+      setLocation("/");
+    }
+  }, [user, setLocation]);
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -70,32 +74,18 @@ export default function Register() {
   });
 
   async function onSubmit(data: RegisterFormValues) {
-    setIsLoading(true);
     try {
       // Remove the confirmPassword field as it's not part of the InsertUser type
       const { confirmPassword, ...userDataToSubmit } = data;
-
-      const response = await apiRequest(
-        "POST",
-        "/api/users",
-        userDataToSubmit
-      );
       
-      toast({
-        title: "Registration successful",
-        description: "Your account has been created. You can now sign in.",
-      });
+      // Use the register function from the auth hook
+      // Note: our auth hook will send the data to /api/auth/register
+      await register(userDataToSubmit);
       
-      // Redirect to sign-in page
-      setLocation("/sign-in");
-    } catch (error: any) {
-      toast({
-        title: "Registration failed",
-        description: error.message || "Please try again with different credentials",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
+      // Auth hook will handle redirect and toast notifications
+    } catch (error) {
+      // Error handling is done in the auth hook
+      console.error("Registration submission error:", error);
     }
   }
 
