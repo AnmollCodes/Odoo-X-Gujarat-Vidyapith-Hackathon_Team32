@@ -106,11 +106,13 @@ export function ProductQrDialog({ productId, isOpen, onClose }: ProductQrDialogP
               className="space-y-4"
             >
               <div className="flex justify-center mb-6">
-                <QrCode 
-                  data={`agrichain://product/${productId}`} 
-                  size={180}
-                  downloadable={true}
-                />
+                <div className="flex flex-col items-center">
+                  <QrCode 
+                    data={`agrichain://product/${productId}`} 
+                    size={180}
+                    downloadable={true}
+                  />
+                </div>
               </div>
               
               {productLoading ? (
@@ -159,16 +161,14 @@ export function ProductQrDialog({ productId, isOpen, onClose }: ProductQrDialogP
                     <div className="flex items-center">
                       <Package className="h-4 w-4 text-gray-400 mr-2" />
                       <span className="text-sm text-gray-600">
-                        {productData?.product?.packagingDetails || "Standard packaging"}
+                        Standard packaging
                       </span>
                     </div>
                     
                     <div className="flex items-center">
                       <Clock className="h-4 w-4 text-gray-400 mr-2" />
                       <span className="text-sm text-gray-600">
-                        {productData?.product?.shelfLife 
-                          ? `${productData.product.shelfLife} days` 
-                          : "Shelf life not specified"}
+                        Shelf life not specified
                       </span>
                     </div>
                   </div>
@@ -226,11 +226,13 @@ export function ProductQrDialog({ productId, isOpen, onClose }: ProductQrDialogP
               className="space-y-4"
             >
               <div className="flex justify-center mb-6">
-                <QrCode 
-                  data={`agrichain://verify/${productId}`} 
-                  size={150} 
-                  downloadable={true}
-                />
+                <div className="flex flex-col items-center">
+                  <QrCode 
+                    data={`agrichain://verify/${productId}`} 
+                    size={150} 
+                    downloadable={true}
+                  />
+                </div>
               </div>
               
               {verificationsLoading ? (
@@ -238,7 +240,7 @@ export function ProductQrDialog({ productId, isOpen, onClose }: ProductQrDialogP
                   <Skeleton className="h-20 w-full" />
                   <Skeleton className="h-20 w-full" />
                 </div>
-              ) : verifications && verifications.length > 0 ? (
+              ) : Array.isArray(verifications) && verifications.length > 0 ? (
                 <div className="space-y-3">
                   {verifications.map((verification: any, index: number) => (
                     <div key={index} className="border rounded-lg p-3 relative">

@@ -160,21 +160,20 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           </motion.div>
           
           <div className="flex space-x-2">
-            <Link href={`/verify?productId=${product?.id || 0}`}>
-              <motion.div
-                variants={buttonVariants}
-                whileHover="hover"
-                whileTap="tap"
+            <motion.div
+              variants={buttonVariants}
+              whileHover="hover"
+              whileTap="tap"
+              onClick={() => setIsQrDialogOpen(true)}
+            >
+              <Button 
+                variant="outline" 
+                size="icon" 
+                className="p-2 h-auto w-auto border-primary-200 hover:border-primary-400 hover:bg-primary-50 transition-colors"
               >
-                <Button 
-                  variant="outline" 
-                  size="icon" 
-                  className="p-2 h-auto w-auto border-primary-200 hover:border-primary-400 hover:bg-primary-50 transition-colors"
-                >
-                  <QrCode className="h-4 w-4 text-primary-600" />
-                </Button>
-              </motion.div>
-            </Link>
+                <QrCode className="h-4 w-4 text-primary-600" />
+              </Button>
+            </motion.div>
             
             <motion.div
               variants={buttonVariants}
@@ -189,6 +188,15 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
               </Button>
             </motion.div>
           </div>
+          
+          {/* QR Code Dialog */}
+          {product?.id && (
+            <ProductQrDialog 
+              productId={product.id} 
+              isOpen={isQrDialogOpen} 
+              onClose={() => setIsQrDialogOpen(false)} 
+            />
+          )}
         </div>
       </div>
     </motion.div>
