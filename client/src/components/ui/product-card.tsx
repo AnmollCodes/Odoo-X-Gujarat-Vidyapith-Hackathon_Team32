@@ -5,6 +5,7 @@ import { ShoppingCart, MapPin, QrCode, ShieldCheck, Star, Leaf, Calendar, Sprout
 import { Product } from "@shared/schema";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { ProductQrDialog } from "@/components/ui/product-qr-dialog";
 
 interface ProductCardProps {
   product: Product;
@@ -13,6 +14,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isQrDialogOpen, setIsQrDialogOpen] = useState(false);
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true
