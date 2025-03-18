@@ -36,19 +36,24 @@ export function Navbar() {
                 Marketplace
               </a>
             </Link>
-            <Link href="/#how-it-works">
-              <a className="font-medium text-gray-700 hover:text-primary-500 transition-colors">
+            <Link href="/how-it-works">
+              <a className={`font-medium ${location === "/how-it-works" ? "text-primary-500" : "text-gray-700 hover:text-primary-500"} transition-colors`}>
                 How It Works
               </a>
             </Link>
-            <Link href="/#for-farmers">
-              <a className="font-medium text-gray-700 hover:text-primary-500 transition-colors">
+            <Link href="/for-farmers">
+              <a className={`font-medium ${location === "/for-farmers" ? "text-primary-500" : "text-gray-700 hover:text-primary-500"} transition-colors`}>
                 For Farmers
               </a>
             </Link>
-            <Link href="/#about-us">
-              <a className="font-medium text-gray-700 hover:text-primary-500 transition-colors">
+            <Link href="/about">
+              <a className={`font-medium ${location === "/about" ? "text-primary-500" : "text-gray-700 hover:text-primary-500"} transition-colors`}>
                 About Us
+              </a>
+            </Link>
+            <Link href="/contact">
+              <a className={`font-medium ${location === "/contact" ? "text-primary-500" : "text-gray-700 hover:text-primary-500"} transition-colors`}>
+                Contact
               </a>
             </Link>
           </div>
@@ -96,7 +101,7 @@ export function Navbar() {
                 Marketplace
               </a>
             </Link>
-            <Link href="/#how-it-works">
+            <Link href="/how-it-works">
               <a 
                 className="block py-2 px-4 font-medium text-gray-700 hover:bg-primary-50 hover:text-primary-500 rounded-lg"
                 onClick={closeMobileMenu}
@@ -104,7 +109,7 @@ export function Navbar() {
                 How It Works
               </a>
             </Link>
-            <Link href="/#for-farmers">
+            <Link href="/for-farmers">
               <a 
                 className="block py-2 px-4 font-medium text-gray-700 hover:bg-primary-50 hover:text-primary-500 rounded-lg"
                 onClick={closeMobileMenu}
@@ -112,12 +117,20 @@ export function Navbar() {
                 For Farmers
               </a>
             </Link>
-            <Link href="/#about-us">
+            <Link href="/about">
               <a 
                 className="block py-2 px-4 font-medium text-gray-700 hover:bg-primary-50 hover:text-primary-500 rounded-lg"
                 onClick={closeMobileMenu}
               >
                 About Us
+              </a>
+            </Link>
+            <Link href="/contact">
+              <a 
+                className="block py-2 px-4 font-medium text-gray-700 hover:bg-primary-50 hover:text-primary-500 rounded-lg"
+                onClick={closeMobileMenu}
+              >
+                Contact
               </a>
             </Link>
             <div className="flex space-x-2 px-4 py-2">

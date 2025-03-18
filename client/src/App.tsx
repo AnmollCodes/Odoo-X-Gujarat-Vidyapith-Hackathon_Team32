@@ -16,6 +16,8 @@ import ForgotPassword from "@/pages/forgot-password";
 import ResetPassword from "@/pages/reset-password";
 import About from "@/pages/about";
 import ForFarmers from "@/pages/for-farmers";
+import HowItWorks from "@/pages/how-it-works";
+import Contact from "@/pages/contact";
 
 function Router() {
   return (
@@ -31,6 +33,8 @@ function Router() {
       <Route path="/reset-password" component={ResetPassword} />
       <Route path="/about" component={About} />
       <Route path="/for-farmers" component={ForFarmers} />
+      <Route path="/how-it-works" component={HowItWorks} />
+      <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
   );
