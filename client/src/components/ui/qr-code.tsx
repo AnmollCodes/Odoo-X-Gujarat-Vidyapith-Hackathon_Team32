@@ -7,9 +7,10 @@ interface QrCodeProps {
   data: string;
   size?: number;
   downloadable?: boolean;
+  className?: string;
 }
 
-export function QrCode({ data, size = 200, downloadable = true }: QrCodeProps) {
+export function QrCode({ data, size = 200, downloadable = true, className }: QrCodeProps) {
   const { toast } = useToast();
   
   // Generate QR code URL using an external service
@@ -33,7 +34,7 @@ export function QrCode({ data, size = 200, downloadable = true }: QrCodeProps) {
   };
   
   return (
-    <div className="flex flex-col items-center">
+    <div className={`flex flex-col items-center ${className || ''}`}>
       <div className="bg-white p-3 rounded-lg shadow-md">
         <img 
           src={qrCodeUrl} 
