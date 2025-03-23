@@ -113,9 +113,4 @@ npm start
 
 
 
----
-
-🔥 **AgriChain is transforming agriculture with transparency and direct farmer-to-consumer connections. Join us in making an impact!** 
-
-
 
