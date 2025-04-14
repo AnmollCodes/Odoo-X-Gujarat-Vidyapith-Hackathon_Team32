@@ -18,7 +18,7 @@ AgriChain is a **blockchain-based platform** that connects farmers directly with
 - **Cloud:** AWS/GCP
 
   # Clone the repository
-git clone https://github.com/your-username/AgriChain.git
+git clone https://github.com/AnmollCodes/AgriChain.git
 cd AgriChain
 
 # Install dependencies
